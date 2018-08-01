@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<classPathEntry
+		location="D:\tachbangMaven\repository\mysql\mysql-connector-java\5.1.22\mysql-connector-java-5.1.22.jar" />
+	<!-- ************************************************工具配置***************************************************** -->
+	<context id="testTables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表； 一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖 -->
+			<property name="autoDelimitKeywords" value="false" />
+			<!-- 生成的Java文件的编码 -->
+			<property name="javaFileEncoding" value="UTF-8" />
+			<!-- 格式化java代码 -->
+			<property name="javaFormatter"
+				value="org.mybatis.generator.api.dom.DefaultJavaFormatter" />
+			<!-- 格式化XML代码 -->
+			<property name="xmlFormatter"
+				value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
+			<!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+			<property name="beginningDelimiter" value="`" />
+			<property name="endingDelimiter" value="`" />
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="false" />
+		</commentGenerator>
+		<!-- *********************************************数据库连接**************************************************** -->
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/renrengene" userId="root"
+			password="admin">
+		</jdbcConnection>
+
+		<!-- ********************************************设置解析类型***************************************************** -->
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 
+			和 NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- ********************************************设置实体类******************************************************* -->
+		<!-- targetProject:生成PO类的位置 -->
+		<javaModelGenerator targetPackage="cn.megagenomics.renrengene.domain"
+			targetProject="D:\intellij-workspace\genius\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+			<!-- (这个为true时必须查询所有字段,否则报错)自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter； -->
+			<!-- <property name="constructorBased" value="true" /> -->
+		</javaModelGenerator>
+
+		<!-- *********************************************设置mapper映射文件**************************************************** -->
+		<!-- targetProject:mapper映射文件生成的位置 -->
+	 	<sqlMapGenerator targetPackage="mapper"
+	 		targetProject="D:\intellij-workspace\genius\src\main\resources">
+			<!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator> 
+
+		<!-- *********************************************设置mapper接口******************************************************* -->
+		<!-- targetPackage：mapper接口生成的位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="cn.megagenomics.renrengene.dao"
+				targetProject="D:\intellij-workspace\genius\src\main\java">
+			<!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator> 
+
+
+		<!-- 指定数据库表 -->
+		<table tableName="supplier_component_cosmetic"></table>
+			<!-- column这个主键id(数据库中的名称) sqlStatement(主键生成策略,mysql数据 库可选Mysql或者JDBC,建议JDBC)
+				identity(是否自增,可选:true:false) -->
+			<!-- <generatedKey column="sms_log_id" sqlStatement="JDBC" identity="true" /> -->
+			<!-- 有些表的字段需要指定java类型 <table schema="" tableName=""> <columnOverride column="" javaType="" /> </table> -->
+	</context>
+</generatorConfiguration>
