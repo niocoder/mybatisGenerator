@@ -31,6 +31,7 @@
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/preacher?useSSL=false" userId="root"
 			password="root">
+
 		</jdbcConnection>
 
 		<!-- ********************************************设置解析类型***************************************************** -->
