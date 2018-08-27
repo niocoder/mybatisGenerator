@@ -71,9 +71,10 @@
 
 
 		<!-- 指定数据库表 -->
-		<table tableName="pre_course_price">
+		<!--<table tableName="pre_group_activity"/>-->
+		<!--<table tableName="pre_group_found"/>-->
+		<table tableName="pre_group_follow"/>
 			<!--<columnOverride column="id" javaType="java.math.BigInteger" jdbcType="LONG"/>-->
-		</table>
 			<!-- column这个主键id(数据库中的名称) sqlStatement(主键生成策略,mysql数据 库可选Mysql或者JDBC,建议JDBC)
 				identity(是否自增,可选:true:false) -->
 			<!-- <generatedKey column="sms_log_id" sqlStatement="JDBC" identity="true" /> -->
