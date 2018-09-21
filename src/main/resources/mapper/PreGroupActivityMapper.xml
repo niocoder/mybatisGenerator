@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="test.Idao.PreGroupActivityMapper" >
+  <resultMap id="BaseResultMap" type="test.pojo.PreGroupActivity" >
+    <constructor >
+      <idArg column="activity_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="activity_class_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="start_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="end_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="group_number" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="activity_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="course_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="course_group_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="total_number" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="course_number" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="creator_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="share_title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="share_description" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="share_img_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    activity_id, activity_class_type, start_time, end_time, group_number, activity_time, 
+    course_price, course_group_price, total_number, course_number, creator_id, create_time, 
+    share_title, share_description, share_img_url
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="test.pojo.PreGroupActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <if test="column!=null" >
+      ${column}
+    </if>
+    <if test="column==null" >
+      <include refid="Base_Column_List" />
+    </if>
+    from pre_group_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pre_group_activity
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pre_group_activity
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="test.pojo.PreGroupActivityExample" >
+    delete from pre_group_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="test.pojo.PreGroupActivity" >
+    insert into pre_group_activity (activity_id, activity_class_type, start_time, 
+      end_time, group_number, activity_time, 
+      course_price, course_group_price, total_number, 
+      course_number, creator_id, create_time, 
+      share_title, share_description, share_img_url
+      )
+    values (#{activityId,jdbcType=INTEGER}, #{activityClassType,jdbcType=INTEGER}, #{startTime,jdbcType=DATE}, 
+      #{endTime,jdbcType=DATE}, #{groupNumber,jdbcType=INTEGER}, #{activityTime,jdbcType=INTEGER}, 
+      #{coursePrice,jdbcType=INTEGER}, #{courseGroupPrice,jdbcType=INTEGER}, #{totalNumber,jdbcType=INTEGER}, 
+      #{courseNumber,jdbcType=INTEGER}, #{creatorId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{shareTitle,jdbcType=VARCHAR}, #{shareDescription,jdbcType=LONGVARCHAR}, #{shareImgUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="test.pojo.PreGroupActivity" >
+    insert into pre_group_activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="activityId != null" >
+        activity_id,
+      </if>
+      <if test="activityClassType != null" >
+        activity_class_type,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="groupNumber != null" >
+        group_number,
+      </if>
+      <if test="activityTime != null" >
+        activity_time,
+      </if>
+      <if test="coursePrice != null" >
+        course_price,
+      </if>
+      <if test="courseGroupPrice != null" >
+        course_group_price,
+      </if>
+      <if test="totalNumber != null" >
+        total_number,
+      </if>
+      <if test="courseNumber != null" >
+        course_number,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="shareTitle != null" >
+        share_title,
+      </if>
+      <if test="shareDescription != null" >
+        share_description,
+      </if>
+      <if test="shareImgUrl != null" >
+        share_img_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="activityId != null" >
+        #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="activityClassType != null" >
+        #{activityClassType,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="groupNumber != null" >
+        #{groupNumber,jdbcType=INTEGER},
+      </if>
+      <if test="activityTime != null" >
+        #{activityTime,jdbcType=INTEGER},
+      </if>
+      <if test="coursePrice != null" >
+        #{coursePrice,jdbcType=INTEGER},
+      </if>
+      <if test="courseGroupPrice != null" >
+        #{courseGroupPrice,jdbcType=INTEGER},
+      </if>
+      <if test="totalNumber != null" >
+        #{totalNumber,jdbcType=INTEGER},
+      </if>
+      <if test="courseNumber != null" >
+        #{courseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shareTitle != null" >
+        #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDescription != null" >
+        #{shareDescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shareImgUrl != null" >
+        #{shareImgUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="test.pojo.PreGroupActivityExample" resultType="java.lang.Integer" >
+    select count(*) from pre_group_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pre_group_activity
+    <set >
+      <if test="record.activityId != null" >
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.activityClassType != null" >
+        activity_class_type = #{record.activityClassType,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=DATE},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=DATE},
+      </if>
+      <if test="record.groupNumber != null" >
+        group_number = #{record.groupNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.activityTime != null" >
+        activity_time = #{record.activityTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.coursePrice != null" >
+        course_price = #{record.coursePrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseGroupPrice != null" >
+        course_group_price = #{record.courseGroupPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalNumber != null" >
+        total_number = #{record.totalNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseNumber != null" >
+        course_number = #{record.courseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shareTitle != null" >
+        share_title = #{record.shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareDescription != null" >
+        share_description = #{record.shareDescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.shareImgUrl != null" >
+        share_img_url = #{record.shareImgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pre_group_activity
+    set activity_id = #{record.activityId,jdbcType=INTEGER},
+      activity_class_type = #{record.activityClassType,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=DATE},
+      end_time = #{record.endTime,jdbcType=DATE},
+      group_number = #{record.groupNumber,jdbcType=INTEGER},
+      activity_time = #{record.activityTime,jdbcType=INTEGER},
+      course_price = #{record.coursePrice,jdbcType=INTEGER},
+      course_group_price = #{record.courseGroupPrice,jdbcType=INTEGER},
+      total_number = #{record.totalNumber,jdbcType=INTEGER},
+      course_number = #{record.courseNumber,jdbcType=INTEGER},
+      creator_id = #{record.creatorId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      share_title = #{record.shareTitle,jdbcType=VARCHAR},
+      share_description = #{record.shareDescription,jdbcType=LONGVARCHAR},
+      share_img_url = #{record.shareImgUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="test.pojo.PreGroupActivity" >
+    update pre_group_activity
+    <set >
+      <if test="activityClassType != null" >
+        activity_class_type = #{activityClassType,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="groupNumber != null" >
+        group_number = #{groupNumber,jdbcType=INTEGER},
+      </if>
+      <if test="activityTime != null" >
+        activity_time = #{activityTime,jdbcType=INTEGER},
+      </if>
+      <if test="coursePrice != null" >
+        course_price = #{coursePrice,jdbcType=INTEGER},
+      </if>
+      <if test="courseGroupPrice != null" >
+        course_group_price = #{courseGroupPrice,jdbcType=INTEGER},
+      </if>
+      <if test="totalNumber != null" >
+        total_number = #{totalNumber,jdbcType=INTEGER},
+      </if>
+      <if test="courseNumber != null" >
+        course_number = #{courseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shareTitle != null" >
+        share_title = #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDescription != null" >
+        share_description = #{shareDescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="shareImgUrl != null" >
+        share_img_url = #{shareImgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="test.pojo.PreGroupActivity" >
+    update pre_group_activity
+    set activity_class_type = #{activityClassType,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=DATE},
+      end_time = #{endTime,jdbcType=DATE},
+      group_number = #{groupNumber,jdbcType=INTEGER},
+      activity_time = #{activityTime,jdbcType=INTEGER},
+      course_price = #{coursePrice,jdbcType=INTEGER},
+      course_group_price = #{courseGroupPrice,jdbcType=INTEGER},
+      total_number = #{totalNumber,jdbcType=INTEGER},
+      course_number = #{courseNumber,jdbcType=INTEGER},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      share_title = #{shareTitle,jdbcType=VARCHAR},
+      share_description = #{shareDescription,jdbcType=LONGVARCHAR},
+      share_img_url = #{shareImgUrl,jdbcType=VARCHAR}
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+</mapper>
