@@ -72,9 +72,8 @@
 
 
 		<!-- 指定数据库表 -->
-		<table tableName="pre_group_activity"/>
-		<table tableName="pre_group_found"/>
-		<table tableName="pre_group_follow"/>
+		<table tableName="pre_agent_contract"/>
+		<table tableName="pre_contract_level"/>
 			<!--<columnOverride column="id" javaType="java.math.BigInteger" jdbcType="LONG"/>-->
 			<!-- column这个主键id(数据库中的名称) sqlStatement(主键生成策略,mysql数据 库可选Mysql或者JDBC,建议JDBC)
 				identity(是否自增,可选:true:false) -->
